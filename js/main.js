@@ -267,6 +267,105 @@
 	};
 	contentWayPoint();
 
+	// Skills marquee
+	var skillsMarquee = function () {
+		var $marquees = $('.skills-marquee');
+		if (!$marquees.length) return;
+
+		$marquees.each(function () {
+			var $marquee = $(this),
+				$track = $marquee.find('.skills-track').first(),
+				half = 0,
+				offset = 0,
+				playing = true,
+				dragging = false,
+				lastX = 0,
+				speed = $track.hasClass('skills-track--slow') ? 0.5 : 1.0,
+				raf = null;
+
+			if ($track.children().length && !$track.data('skillsDuplicated')) {
+				$track.append($track.children().clone());
+				$track.data('skillsDuplicated', true);
+			}
+
+			var measure = function () {
+				half = $track[0].scrollWidth / 2;
+			};
+			measure();
+			$(window).on('resize', measure);
+
+			var tick = function () {
+				if (playing && !dragging) offset += speed;
+				if (half > 0) {
+					offset = offset % half;
+					if (offset < 0) offset += half;
+					$track.css('transform', 'translate3d(' + (-offset) + 'px, 0, 0)');
+				}
+				raf = requestAnimationFrame(tick);
+			};
+			raf = requestAnimationFrame(tick);
+
+			$marquee.on('mouseenter', function () {
+				playing = false;
+			});
+
+			$marquee.on('mouseleave', function () {
+				playing = true;
+				dragging = false;
+				$marquee.removeClass('skills-dragging');
+			});
+
+			$marquee.on('mousedown', function (e) {
+				dragging = true;
+				lastX = e.pageX;
+				$marquee.addClass('skills-dragging');
+				e.preventDefault();
+			});
+
+			$(window).on('mousemove', function (e) {
+				if (!dragging) return;
+				offset -= (e.pageX - lastX);
+				lastX = e.pageX;
+			});
+
+			$(window).on('mouseup', function () {
+				dragging = false;
+				$marquee.removeClass('skills-dragging');
+			});
+
+			$marquee.on('wheel', function (e) {
+				e.preventDefault();
+				offset += e.originalEvent.deltaY;
+			});
+		});
+	};
+	skillsMarquee();
+
+// Experience tabs
+	var closeExperience = function () {
+		$('.experience-detail').removeClass('open');
+		$('.experience-tab').removeClass('active');
+		$('#experience-overlay').removeClass('show');
+		$('body').removeClass('experience-modal-lock');
+	};
+
+	$('.experience-tab').on('click', function () {
+		var target = $(this).data('target'),
+			$panel = $('#' + target);
+		$('.experience-tab').removeClass('active');
+		$(this).addClass('active');
+		$('.experience-detail').removeClass('open');
+		$panel.addClass('open');
+		$('#experience-overlay').addClass('show');
+		$('body').addClass('experience-modal-lock');
+	});
+
+	$('.experience-close').on('click', closeExperience);
+	$('#experience-overlay').on('click', closeExperience);
+	$(document).on('keyup', function (e) {
+		if (e.key === 'Escape' || e.keyCode === 27) closeExperience();
+	});
+
 	// magnific popup
 	$('.image-popup').magnificPopup({
     type: 'image',
@@ -298,9 +397,39 @@
     fixedContentPos: false
   });
 
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var status = document.getElementById('formStatus');
+      var btn = contactForm.querySelector('input[type="submit"]');
+      var data = new FormData(contactForm);
 
+      status.style.color = '#fff';
+      status.textContent = 'Sending...';
+      status.style.display = 'block';
+      btn.disabled = true;
 
-
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok) {
+          status.textContent = "Thanks! Your message has been sent. I'll get back to you soon.";
+          status.style.color = '#ffbd39';
+          contactForm.reset();
+        } else {
+          return res.json().then(function(err) { throw new Error(err.errors ? err.errors.map(function(e){return e.message;}).join(', ') : 'Something went wrong.'); });
+        }
+      }).catch(function(err) {
+        status.textContent = err.message || 'Sorry, something went wrong. Please try again.';
+        status.style.color = '#ff6b6b';
+      }).then(function() {
+        btn.disabled = false;
+      });
+    });
+  }
 
 })(jQuery);
 

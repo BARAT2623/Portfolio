@@ -1,4 +1,12 @@
 ﻿/* From Uiverse.io by Smit-Prajapati */ 
+.owl-carousel.home-slider .slider-item .slider-text .hero-summary {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 460px;
+  margin-bottom: 24px;
+}
+
 .parent {
   width: 290px;
   height: 300px;
@@ -232,4 +240,171 @@
 
 .parent:hover .card .logo .circle5 {
   transform: translate3d(0, 0, 120px);
+}
+
+.experience-tab {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.experience-tab.active {
+  background: #ffbd39;
+}
+
+.experience-tab.active .icon i {
+  color: #fff;
+}
+
+.experience-tab.active .desc h3,
+.experience-tab.active .desc p {
+  color: #000000;
+}
+
+.experience-tab.active .desc h3:after {
+  background: #000000;
+}
+
+.experience-detail {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(760px, 92vw);
+  max-height: 84vh;
+  overflow-y: auto;
+  z-index: 1105;
+  padding: 2.6em 3em;
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 189, 57, 0.35);
+  border-left: 4px solid #ffbd39;
+  border-radius: 16px;
+  box-shadow: 0 25px 80px -10px rgba(0, 0, 0, 0.65);
+}
+
+.experience-detail.open {
+  display: block;
+  animation: expPopIn 0.35s ease;
+}
+
+.experience-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.experience-overlay.show {
+  display: block;
+}
+
+body.experience-modal-lock {
+  overflow: hidden;
+}
+
+.experience-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 189, 57, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffbd39;
+  font-size: 22px;
+  line-height: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.experience-close:hover {
+  background: #ffbd39;
+  color: #000000;
+}
+
+@keyframes expPopIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.experience-detail-header {
+  padding-right: 40px;
+}
+
+.experience-detail-header h3 {
+  color: #ffbd39;
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+
+.experience-detail-header .experience-company {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.experience-detail-header .experience-period {
+  display: inline-block;
+  color: #ffbd39;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid #ffbd39;
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 18px;
+}
+
+.experience-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-list li {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.8;
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.experience-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 8px;
+  height: 8px;
+  background: #ffbd39;
+  border-radius: 50%;
 }
