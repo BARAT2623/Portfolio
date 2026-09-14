@@ -33,7 +33,8 @@
 			if($('#ftco-loader').length > 0) {
 				$('#ftco-loader').removeClass('show');
 			}
-		}, 1);
+			counter();
+		}, 4500);
 	};
 	loader();
 
@@ -184,14 +185,19 @@
 				var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
 				$('.number').each(function(){
 					var $this = $(this),
+						experience = $this.data('experience');
+					if (experience && !$this.data('expDone')) {
+						$this.data('expDone', true);
+						animateExperience($this, new Date(experience), 2000);
+					} else {
 						num = $this.data('number');
-						console.log(num);
-					$this.animateNumber(
-					  {
-					    number: num,
-					    numberStep: comma_separator_number_step
-					  }, 7000
-					);
+						$this.animateNumber(
+						  {
+						    number: num,
+						    numberStep: comma_separator_number_step
+						  }, 7000
+						);
+					}
 				});
 				
 			}
@@ -199,7 +205,30 @@
 		} , { offset: '95%' } );
 
 	}
-	counter();
+
+	function animateExperience($el, startDate, duration) {
+		var now = new Date(),
+			totalMonths = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth()),
+			startTime = null;
+
+		function format(months) {
+			var years = Math.floor(months / 12),
+				rest = months % 12;
+			if (years === 0) return rest + ' mo';
+			if (rest === 0) return years + ' yr';
+			return years + ' yr ' + rest + ' mo';
+		}
+
+		function step(ts) {
+			if (!startTime) startTime = ts;
+			var progress = Math.min((ts - startTime) / duration, 1),
+				current = Math.max(1, Math.round(progress * totalMonths));
+			$el.text(format(current));
+			if (progress < 1) requestAnimationFrame(step);
+		}
+
+		requestAnimationFrame(step);
+	}
 
 
 	var contentWayPoint = function() {

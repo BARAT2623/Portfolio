@@ -8866,6 +8866,8 @@ h1, h2, h3, h4, h5,
       color: #fff; }
     .services-1:hover h3 {
       color: #000000; }
+    .services-1:hover .desc p {
+      color: #000000; }
       .services-1:hover h3:after {
         background: #000000; }
 
@@ -9079,9 +9081,7 @@ textarea.form-control {
 .ftco-bg-dark {
   background: #3c312e; }
 
-.ftco-footer {
-  font-size: 16px;
-  background: #000000;
+.ftco-footer { font-size: 16px; background: transparent;
   padding: 7em 0;
   z-index: 0; }
   .ftco-footer .ftco-footer-logo {
@@ -9682,3 +9682,232 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+#ftco-loader .loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+.loader {
+  width: 80px;
+  height: 50px;
+  position: relative; }
+
+.loader-text {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  color: #ffbd39;
+  animation: text_713 3.5s ease both infinite;
+  font-size: .8rem;
+  letter-spacing: 1px; }
+
+.load {
+  background-color: #ffbd39;
+  border-radius: 50px;
+  display: block;
+  height: 16px;
+  width: 16px;
+  bottom: 0;
+  position: absolute;
+  transform: translateX(64px);
+  animation: loading_713 3.5s ease both infinite; }
+
+.load::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #D1C2FF;
+  border-radius: inherit;
+  animation: loading2_713 3.5s ease both infinite; }
+
+@keyframes text_713 {
+  0% {
+    letter-spacing: 1px;
+    transform: translateX(0px); }
+  40% {
+    letter-spacing: 2px;
+    transform: translateX(26px); }
+  80% {
+    letter-spacing: 1px;
+    transform: translateX(32px); }
+  90% {
+    letter-spacing: 2px;
+    transform: translateX(0px); }
+  100% {
+    letter-spacing: 1px;
+    transform: translateX(0px); } }
+
+@keyframes loading_713 {
+  0% {
+    width: 16px;
+    transform: translateX(0px); }
+  40% {
+    width: 100%;
+    transform: translateX(0px); }
+  80% {
+    width: 16px;
+    transform: translateX(64px); }
+  90% {
+    width: 100%;
+    transform: translateX(0px); }
+  100% {
+    width: 16px;
+    transform: translateX(0px); } }
+
+@keyframes loading2_713 {
+  0% {
+    transform: translateX(0px);
+    width: 16px; }
+  40% {
+    transform: translateX(0%);
+    width: 80%; }
+  80% {
+    width: 100%;
+    transform: translateX(0px); }
+  90% {
+    width: 80%;
+    transform: translateX(15px); }
+  100% {
+    transform: translateX(0px);
+    width: 16px; } }
+
+.project-cards .parent {
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto; }
+
+.project-cards .card {
+  position: relative;
+  border: none; }
+
+.project-cards a {
+  text-decoration: none; }
+
+.education-cards .card {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  height: 220px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%);
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+  box-shadow: 0 0 0 5px #ffffff80;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+.education-cards .card svg {
+  width: 48px;
+  fill: #ffbd39;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+.education-cards .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+
+.education-cards .card__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #ffbd39 0%, #f7931e 100%);
+  transform: rotateX(-90deg);
+  transform-origin: bottom;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+.education-cards .card:hover .card__content {
+  transform: rotateX(0deg); }
+
+.education-cards .card__title {
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 700; }
+
+.education-cards .card:hover svg {
+  scale: 0; }
+
+.education-cards .card__description {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.5; }
+
+.education-cards .card__label {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ca8a04; }
+
+.education-cards .card:hover .card__label {
+  scale: 0; }
+
+.services-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px; }
+
+.services-cards .card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: 180px;
+  width: 100%;
+  max-width: 260px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 400ms; }
+
+.services-cards .red { background-color: #f7931e; }
+
+.services-cards .blue { background-color: #ffbd39; }
+
+.services-cards .green { background-color: #a0f669; }
+
+.services-cards .s-icon {
+  font-size: 34px;
+  line-height: 1;
+  margin-bottom: 12px; }
+
+.services-cards .card .tip {
+  font-size: 1em;
+  font-weight: 700;
+  margin: 0 0 6px; }
+
+.services-cards .card .second-text {
+  font-size: .7em;
+  opacity: .9;
+  margin: 0; }
+
+.services-cards .card:hover {
+  transform: scale(1.1, 1.1); }
+
+.services-cards:hover > .card:not(:hover) {
+  filter: blur(10px);
+  transform: scale(0.9, 0.9); }
