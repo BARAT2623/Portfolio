@@ -34,7 +34,7 @@
 				$('#ftco-loader').removeClass('show');
 			}
 			counter();
-		}, 4500);
+		}, 800);
 	};
 	loader();
 
@@ -330,6 +330,26 @@
 
 			$(window).on('mouseup', function () {
 				dragging = false;
+				$marquee.removeClass('skills-dragging');
+			});
+
+			$marquee.on('touchstart', function (e) {
+				playing = false;
+				dragging = true;
+				lastX = e.originalEvent.touches[0].pageX;
+				$marquee.addClass('skills-dragging');
+			});
+
+			$marquee.on('touchmove', function (e) {
+				if (!dragging) return;
+				var t = e.originalEvent.touches[0];
+				offset -= (t.pageX - lastX);
+				lastX = t.pageX;
+			});
+
+			$marquee.on('touchend', function () {
+				dragging = false;
+				playing = true;
 				$marquee.removeClass('skills-dragging');
 			});
 

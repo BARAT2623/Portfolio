@@ -8629,6 +8629,13 @@ h1, h2, h3, h4, h5,
         .owl-carousel.home-slider .owl-dots .owl-dot.active {
           background: #fff; }
 
+    /* Allow vertical touch scrolling over the (single-slide) home slider
+       instead of Owl Carousel's touch-action:none blocking page scroll. */
+    .owl-carousel.home-slider .owl-item,
+    .owl-carousel.home-slider.owl-drag .owl-item {
+      -ms-touch-action: pan-y;
+      touch-action: pan-y; }
+
 .hero-wrap {
   width: 100%;
   height: 100%;
